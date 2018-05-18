@@ -10,8 +10,17 @@ class App extends Component {
     };
   }
   componentWillMount() {
-    
-    fetch('http://localhost:8095/showBalance?mobileNumber=25999999').then(results => results.json())
+   
+	var data2 = new FormData();
+	const payload = {
+		technologyTag : 'tag1'
+
+	};
+data2.append("technologyTag", JSON.stringify(payload));
+   
+    fetch('http://localhost:8090/search/getPartnersFromTag',{
+	method: 'POST',
+    body: data2}).then(results => results.json())
     .then(res => this.setState({ data: res }));
    
   }
