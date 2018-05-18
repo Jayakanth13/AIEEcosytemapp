@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,9 +58,11 @@ public class Controller1 {
 	}
 	
 	
-	
+	@CrossOrigin(origins = "http://localhost:8190")
 	@RequestMapping(method = RequestMethod.POST,value="/search/getPartnersFromTag")
 	public List<Partner> retrievePartnersFromTagSearch(String technologyTag) {
+		
+		technologyTag = technologyTag.substring(technologyTag.indexOf(':')+2, technologyTag.length()-2);
 		
 		System.out.println(":::::::::::::::::::::::"+technologyTag);
 		return service.searchPartnersByTag(technologyTag);
